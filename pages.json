@@ -5,6 +5,28 @@
 			"style": {
 				"navigationBarTitleText": "App"
 			}
+		},
+		{
+			"path": "pages/search-page/index",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"autoBackButton": false,
+						"buttons": [{
+							"text": "取消",
+							"float": "right",
+							"fontSize": "36rpx"
+						}],
+						"searchInput": {
+							"align": "left",
+							"borderRadius": "20px",
+							"placeholder": "请输入",
+							"backgroundColor": "#ebebeb",
+							"placeholderColor": "#ccc"
+						}
+					}
+				}
+			}
 		}
 	],
 	"globalStyle": {

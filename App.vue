@@ -15,4 +15,5 @@
 <style>
 	/*每个页面公共css */
 	@import url("~@/static/iconfont.css");
+	@import url("~@/static/scrollbarEx.css");
 </style>

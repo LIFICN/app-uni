@@ -16,11 +16,13 @@
 			</template>
 
 			<template v-if="footCurrent===1">
-				<view style="text-align: center;">Me,CurrentTime:{{currDateTimeString}}</view>
+				<view style="display: flex;flex: 1;justify-content:center ;align-items: center;">
+					<button @click="goToSearchPage">跳转至搜索页面</button>
+				</view>
 			</template>
 
 			<template v-if="footCurrent===2">
-				<view style="text-align: center;">Star,CurrentTime:{{currDateTimeString}}</view>
+				<list-sample style="flex:1;overflow-y: auto;" />
 			</template>
 		</view>
 
@@ -37,11 +39,13 @@
 
 	import tab from '@/components/v-tab.vue'
 	import bottomTab from '@/components/bottom-tab.vue'
+	import listSample from '@/components/list-sample.vue'
 
 	export default {
 		components: {
 			tab,
-			bottomTab
+			bottomTab,
+			listSample
 		},
 		data() {
 			return {
@@ -75,17 +79,13 @@
 		computed: {
 			containerHeight: function() {
 				var sysH = uni.getSystemInfoSync().screenHeight - 44;
-
 				//#ifdef APP-PLUS
 				var statusbarH = uni.getSystemInfoSync().statusBarHeight;
 				return sysH - statusbarH;
 				//#endif
-
+				//#ifndef APP-PLUS
 				return sysH;
-			},
-			currDateTimeString: function() {
-				let currTimestamp = Date.parse(new Date());
-				return toDateTimeString(currTimestamp)
+				//#endif
 			}
 		},
 		onLoad() {},
@@ -102,6 +102,18 @@
 				} = e.detail;
 
 				this.tabCurrent = current;
+			},
+			getCurrentTime() {
+				let currTimestamp = Date.parse(new Date());
+				return toDateTimeString(currTimestamp)
+			},
+			goToSearchPage() {
+				uni.navigateTo({
+					url: '../search-page/index',
+					fail(error) {
+						console.log(JSON.stringify(error))
+					}
+				})
 			}
 		}
 	}
