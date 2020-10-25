@@ -7,7 +7,7 @@
 			}
 		},
 		{
-			"path": "pages/search-page/index",
+			"path": "pages/search/index",
 			"style": {
 				"app-plus": {
 					"titleNView": {
@@ -26,6 +26,24 @@
 						}
 					}
 				}
+			}
+		},
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "Login"
+			}
+		},
+		{
+			"path": "pages/reg/index",
+			"style": {
+				"navigationBarTitleText": "Register"
+			}
+		},
+		{
+			"path": "pages/forget/index",
+			"style": {
+				"navigationBarTitleText": "Forget"
 			}
 		}
 	],

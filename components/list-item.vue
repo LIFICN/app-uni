@@ -37,14 +37,12 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 	.list-item {
 		display: flex;
 		flex-direction: row;
-		overflow: hidden;
 		flex-wrap: nowrap;
 		justify-content: flex-start;
-		/* padding-left: 30rpx; */
 		overflow: hidden;
 		border-bottom: 0.5px solid #F1F1F1;
 	}
@@ -56,9 +54,9 @@
 	.list-content {
 		display: flex;
 		flex: 1;
-		color: #3b4144;
 		flex-direction: row;
 		align-items: center;
+		color: #3b4144;
 		overflow: hidden;
 	}
 
@@ -71,7 +69,7 @@
 
 	.text-ellipsis {
 		overflow: hidden;
-		text-overflow: ellipsis;
+		text-overflow: ellipsis; //flex布局时,父容器必须添加overflow: hidden;,才会生效,大坑!
 		white-space: nowrap;
 	}
 </style>

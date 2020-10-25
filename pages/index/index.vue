@@ -1,23 +1,27 @@
 <template>
-	<view class="container" :style="{height:containerHeight+'px'}">
+	<view class="container" :style="{height:realHeight+'px'}">
 		<view class="content" style="display: flex;flex-direction: column;">
 			<template v-if="footCurrent===0">
-				<tab :current="tabCurrent" :tabList="tabList" @change="tabChange" />
+				<tab :isScroll="true" :current="tabCurrent" :tabList="tabList" @change="tabChange" />
 
 				<!-- 父容器为flex布局,子容器felx:1;自适应宽高,注意flex布局方向和overflow-y设置 -->
-				<swiper :current="tabCurrent" duration="300" :circular="false" indicator-color="rgba(255,255,255,0)"
-				 indicator-active-color="rgba(255,255,255,0)" @change="swiperChange" style="flex: 1;" easing-function="easeInOutCubic">
+				<swiper :current="tabCurrent" style="flex: 1;" :circular="false" @change="swiperChange" duration="300"
+				 easing-function="easeInOutCubic">
 					<swiper-item v-for="(item,index) in tabList" :current="tabCurrent" :key="index" style="overflow-y: scroll;">
-						<view style="text-align: center;">
-							{{index}}
-						</view>
+						<view style="text-align: center;">{{index}}</view>
 					</swiper-item>
 				</swiper>
 			</template>
 
 			<template v-if="footCurrent===1">
-				<view style="display: flex;flex: 1;justify-content:center ;align-items: center;">
-					<button @click="goToSearchPage">跳转至搜索页面</button>
+				<view style="display: flex;flex: 1;justify-content:center ;align-items: center;flex-direction: column;">
+					<button @click="goToPage('../search/index')">搜索页</button>
+					<br>
+					<button @click="goToPage('../login/index')">登录页</button>
+					<br>
+					<button @click="goToPage('../reg/index')">注册页</button>
+					<br>
+					<button @click="goToPage('../forget/index')">忘记密码</button>
 				</view>
 			</template>
 
@@ -51,16 +55,8 @@
 			return {
 				tabCurrent: 0,
 				footCurrent: 0,
-				tabList: [{
-						name: "tab1"
-					},
-					{
-						name: "tab2"
-					},
-					{
-						name: "tab3"
-					}
-				],
+				realHeight: this.$realHeight(),
+				tabList: [],
 				footList: [{
 						name: "Home",
 						icon: "iconfont icon-shouye"
@@ -76,19 +72,14 @@
 				]
 			}
 		},
-		computed: {
-			containerHeight: function() {
-				var sysH = uni.getSystemInfoSync().screenHeight - 44;
-				//#ifdef APP-PLUS
-				var statusbarH = uni.getSystemInfoSync().statusBarHeight;
-				return sysH - statusbarH;
-				//#endif
-				//#ifndef APP-PLUS
-				return sysH;
-				//#endif
+		onLoad() {},
+		created() {
+			for (var i = 0; i < 10; i++) {
+				this.tabList.push({
+					name: `tabItem-${i}`
+				})
 			}
 		},
-		onLoad() {},
 		methods: {
 			tabChange(index) {
 				this.tabCurrent = index
@@ -107,9 +98,9 @@
 				let currTimestamp = Date.parse(new Date());
 				return toDateTimeString(currTimestamp)
 			},
-			goToSearchPage() {
+			goToPage(url) {
 				uni.navigateTo({
-					url: '../search-page/index',
+					url: url,
 					fail(error) {
 						console.log(JSON.stringify(error))
 					}
@@ -119,7 +110,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 	.container {
 		display: flex;
 		flex-direction: column;

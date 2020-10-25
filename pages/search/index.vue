@@ -1,5 +1,5 @@
 <template>
-	<view style="display: flex;justify-content: center;align-items: center;" :style="{height:containerHeight+'px'}">
+	<view style="display: flex;justify-content: center;align-items: center;" :style="{height:realHeight+'px'}">
 		<text>搜索框内容:{{content}}</text>
 	</view>
 </template>
@@ -8,19 +8,8 @@
 	export default {
 		data() {
 			return {
-				content: ''
-			}
-		},
-		computed: {
-			containerHeight: function() {
-				var sysH = uni.getSystemInfoSync().screenHeight - 44;
-				//#ifdef APP-PLUS
-				var statusbarH = uni.getSystemInfoSync().statusBarHeight;
-				return sysH - statusbarH;
-				//#endif
-				//#ifndef APP-PLUS
-				return sysH;
-				//#endif
+				content: '',
+				realHeight: this.$realHeight()
 			}
 		},
 		onNavigationBarButtonTap(e) {
@@ -41,5 +30,5 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 </style>

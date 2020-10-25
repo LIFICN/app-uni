@@ -1,20 +1,24 @@
 <template>
-	<scroll-view class="v-tab" scroll-with-animation scroll-x :scroll-left="scrollLeft" :style="{backgroundColor:backgroundColor}">
-		<view class="flex">
+	<view class="v-tab" ref="vTab">
+		<scroll-view scroll-with-animation scroll-x :scroll-left="isScroll?scrollLeft:0" :style="{backgroundColor:bgColor,borderBottom:[isShowBorder?'0.5px solid #ddd':'none']}">
+			<view class="container">
 
-			<view class="v-tab-item" v-for="(item,index) in tabList" :key="index" :id="index" @tap="tabSelect(index)">
-				<text :style="{color:(index===current?fontSelectedColor:fontColor),fontSize:textSize+'rpx',lineHeight: height+'rpx'}">{{item.name}}</text>
-				<view :style="{height:barHeight+'rpx'}" :class="[current==index?barBgColor:'']"></view>
+				<view class="v-tab-item" v-for="(item,index) in tabList" :key="index" :id="index" @tap="tabSelect(index)">
+					<text class="text-nowrap" :style="{color:(index===current?fontSelectedColor:fontColor),fontSize:fontSize+'rpx',lineHeight: height+'rpx'}">{{item.name}}</text>
+					<view :style="{height:barHeight+'rpx',backgroundColor:[current===index?barBgColor:'']}"></view>
+				</view>
+
 			</view>
-
-		</view>
-	</scroll-view>
+		</scroll-view>
+	</view>
 </template>
 <script>
+	//此组件为自写,有问题请更换，推荐: https://ext.dcloud.net.cn/plugin?id=1971 
 	export default {
-		name: 'v-tab',
 		data() {
-			return {};
+			return {
+				convertWidth: 0 //tabItem平均宽度
+			};
 		},
 		props: {
 			tabList: {
@@ -39,7 +43,7 @@
 			},
 			barBgColor: {
 				type: String, //底栏颜色
-				default: "bg-blue"
+				default: "#0081ff"
 			},
 			fontColor: {
 				type: String, //字体颜色
@@ -47,15 +51,23 @@
 			},
 			fontSelectedColor: {
 				type: String, //选中字体颜色
-				default: "#3A86FB"
+				default: "#0081ff"
 			},
-			textSize: {
+			fontSize: {
 				type: [Number, String], // 字号
 				default: 30
 			},
-			backgroundColor: {
+			bgColor: {
 				type: String, //背景色
 				default: '#ffffff'
+			},
+			isShowBorder: {
+				type: Boolean, //是否显示底部边框
+				default: true
+			},
+			isScroll: {
+				type: Boolean, //是否滚动
+				default: false
 			}
 		},
 		methods: {
@@ -65,20 +77,33 @@
 		},
 		computed: {
 			scrollLeft() {
-				return (this.current - 1) * 60;
+				let convertWidth = this.convertWidth
+				if (convertWidth > 0)
+					return (this.current - 1) * convertWidth
+				return (this.current - 1) * 65;
 			}
+		},
+		mounted() {
+			this.$nextTick(function() {
+				const query = uni.createSelectorQuery();
+				query.select('.v-tab-item').boundingClientRect(data => {
+					this.convertWidth = data.width //获取每个tabItem平均宽度
+				}).exec();
+			})
 		}
 	};
 </script>
 
-<style>
-	/* 	scroll-view,
-	view {
-		box-sizing: border-box;
-	} */
-
+<style lang="scss" scoped>
 	.v-tab {
-		white-space: nowrap;
+		width: 100%;
+		box-sizing: border-box;
+		overflow: hidden;
+
+		// 隐藏滚动条,适配全平台
+		::-webkit-scrollbar {
+			display: none;
+		}
 	}
 
 	.v-tab-item {
@@ -87,25 +112,14 @@
 		padding: 0 20upx;
 	}
 
-	.flex {
+	.container {
 		display: flex;
-		text-align: center;
 		flex-direction: row;
+		text-align: center;
 	}
 
-	.text-blue {
-		color: #0081ff;
-	}
-
-	.text-white {
-		color: #ffffff;
-	}
-
-	.bg-white {
-		background-color: #ffffff;
-	}
-
-	.bg-blue {
-		background-color: #0081ff;
+	.text-nowrap {
+		overflow: hidden;
+		white-space: nowrap;
 	}
 </style>
