@@ -2,24 +2,26 @@
 	<!-- https://ext.dcloud.net.cn/plugin?id=538 如果赶时间,直接下载别人模板改 -->
 	<view class="main" :style="{height:realHeight+'px'}">
 
-		<br>
 		<view class="list-item">
-			<text class="list-text">手机号</text>
-			<input type="text" value="" placeholder="请输入手机号" />
+			<input class="list-input" type="text" v-model="phone" placeholder="请输入手机号" />
+			<text v-show="phone.length>0" class="list-close" @click="clearInput('phone')">✕</text>
 		</view>
-		<br>
+
 		<view class="list-item">
-			<text class="list-text">新密码</text>
-			<input type="text" value="" placeholder="请输入新密码" />
+			<input class="list-input" value="" v-model="pwd" placeholder="请输入新密码" />
+			<text v-show="pwd.length>0" class="list-close" @click="clearInput('pwd')">✕</text>
 		</view>
-		<br>
+
 		<view class="list-item">
-			<text class="list-text">验证码</text>
-			<input type="text" value="" placeholder="请输入验证码" />
-			<text class="code">获取验证码</text>
+			<input class="list-input" v-model="code" placeholder="请输入短信验证码" />
+			<text v-show="code.length>0" class="list-close" @click="clearInput('code')">✕</text>
+			<text class="code" @click="sendCode" :style="{color: [sendCodeInterval>0?'gray':'#007aff']}">
+				{{sendCodeInterval>0 ?`${sendCodeInterval}s`:'获取验证码'}}
+			</text>
 		</view>
-		<br>
+
 		<button hover-class="btn-hover" class="btn">重置密码</button>
+
 	</view>
 </template>
 
@@ -28,7 +30,35 @@
 		data() {
 			return {
 				content: '',
-				realHeight: this.$realHeight()
+				realHeight: this.$realHeight(),
+				phone: '',
+				pwd: '',
+				code: '',
+				sendCodeInterval: 0
+			}
+		},
+		methods: {
+			clearInput(type) {
+				if (type === 'phone') {
+					this.phone = ''
+				} else if (type === 'pwd') {
+					this.pwd = ''
+				} else if (type === 'code') {
+					this.code = ''
+				}
+			},
+			sendCode() {
+				var that = this
+				if (that.sendCodeInterval === 0) {
+					var intervalId = setInterval(() => {
+						that.sendCodeInterval++
+						if (that.sendCodeInterval >= 60) {
+							that.sendCodeInterval = 0
+							clearInterval(intervalId)
+							console.log('定时器已清除')
+						}
+					}, 1000);
+				}
 			}
 		}
 	}
@@ -47,29 +77,38 @@
 		display: flex;
 		align-items: center;
 		flex-direction: column;
+		overflow: hidden;
 	}
 
 	.list-item {
 		display: flex;
 		flex-direction: row;
 		border: 1px solid #F1F1F1;
-		border-radius: 20px;
-		padding: 6px;
+		border-radius: 50rpx;
+		padding: 16rpx;
 		width: 80%;
+		margin: 20rpx;
 	}
 
-	.list-text {
-		color: #555555;
-		padding-right: 4px;
-		width: 100rpx;
+	.list-input {
+		flex: 1;
+		padding-right: 10rpx;
+	}
+
+	.list-close {
+		font-size: 12rpx;
+		display: flex;
+		align-items: center;
+		margin-right: 10rpx;
 	}
 
 	.btn {
-		font-size: 16px;
-		width: 81%;
-		border-radius: 30px;
+		font-size: 35rpx;
+		width: 80%;
+		border-radius: 50rpx;
 		background-color: #007aff;
 		color: white;
+		margin: 20rpx;
 	}
 
 	.code {
@@ -77,6 +116,6 @@
 		justify-items: center;
 		align-items: center;
 		color: #555555;
-		font-size: 20rpx;
+		font-size: 25rpx;
 	}
 </style>

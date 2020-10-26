@@ -7,14 +7,14 @@
 				<!-- 父容器为flex布局,子容器felx:1;自适应宽高,注意flex布局方向和overflow-y设置 -->
 				<swiper :current="tabCurrent" style="flex: 1;" :circular="false" @change="swiperChange" duration="300"
 				 easing-function="easeInOutCubic">
-					<swiper-item v-for="(item,index) in tabList" :current="tabCurrent" :key="index" style="overflow-y: scroll;">
+					<swiper-item v-for="(item,index) in tabList" :current="tabCurrent" :key="index" style="overflow-y: auto;">
 						<view style="text-align: center;">{{index}}</view>
 					</swiper-item>
 				</swiper>
 			</template>
 
 			<template v-if="footCurrent===1">
-				<view style="display: flex;flex: 1;justify-content:center ;align-items: center;flex-direction: column;">
+				<view style="flex: 1;display: flex;justify-content:center ;align-items: center;flex-direction: column;">
 					<button @click="goToPage('../search/index')">搜索页</button>
 					<br>
 					<button @click="goToPage('../login/index')">登录页</button>
@@ -115,10 +115,11 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+		overflow: hidden;
 	}
 
 	.content {
 		flex: 1;
-		overflow-y: scroll;
+		overflow-y: auto;
 	}
 </style>

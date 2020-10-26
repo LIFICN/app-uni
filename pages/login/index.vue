@@ -5,19 +5,19 @@
 		<view class="head">
 			<image class="head-img" src="../../static/logo.png">
 		</view>
-		<br>
+
 		<view class="list-item">
-			<text class="list-text">手机号</text>
-			<input type="text" value="" placeholder="请输入手机号" />
+			<input class="list-input" type="text" v-model="phone" placeholder="请输入手机号" />
+			<text v-show="phone.length>0" class="list-close" @click="clearInput('phone')">✕</text>
 		</view>
-		<br>
+
 		<view class="list-item">
-			<text class="list-text">密 码</text>
-			<input type="text" value="" placeholder="请输入密码" />
+			<input class="list-input" value="" v-model="pwd" placeholder="请输入密码" />
+			<text v-show="pwd.length>0" class="list-close" @click="clearInput('pwd')">✕</text>
 		</view>
-		<br>
+
 		<button hover-class="btn-hover" class="btn">立即登录</button>
-		<br>
+
 		<view class="tip">
 			<text class="tip-right" @click="goToPage('../forget/index')">忘记密码</text>
 			|
@@ -31,7 +31,9 @@
 		data() {
 			return {
 				content: '',
-				realHeight: this.$realHeight()
+				realHeight: this.$realHeight(),
+				phone: '',
+				pwd: ''
 			}
 		},
 		methods: {
@@ -42,6 +44,13 @@
 						console.log(JSON.stringify(error))
 					}
 				})
+			},
+			clearInput(type) {
+				if (type === 'phone') {
+					this.phone = ''
+				} else if (type === 'pwd') {
+					this.pwd = ''
+				}
 			}
 		}
 	}
@@ -60,6 +69,7 @@
 		display: flex;
 		align-items: center;
 		flex-direction: column;
+		overflow: hidden;
 	}
 
 	.head {
@@ -67,7 +77,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		margin-top: 30px;
+		margin-top: 30rpx;
 		width: 161rpx;
 		height: 161rpx;
 	}
@@ -81,35 +91,44 @@
 		display: flex;
 		flex-direction: row;
 		border: 1px solid #F1F1F1;
-		border-radius: 20px;
-		padding: 6px;
+		border-radius: 50rpx;
+		padding: 16rpx;
 		width: 80%;
+		margin: 20rpx;
 	}
 
-	.list-text {
-		color: #555555;
-		padding-right: 4px;
-		width: 100rpx;
+	.list-input {
+		flex: 1;
+		padding-right: 10rpx;
+	}
+
+	.list-close {
+		font-size: 12rpx;
+		display: flex;
+		align-items: center;
+		margin-right: 10rpx;
 	}
 
 	.btn {
-		font-size: 16px;
-		width: 81%;
-		border-radius: 30px;
+		font-size: 35rpx;
+		width: 80%;
+		border-radius: 50rpx;
 		background-color: #007aff;
 		color: white;
+		margin: 20rpx;
 	}
 
 	.tip {
 		text-align: center;
 		color: #007aff;
+		margin-top: 20rpx;
 	}
 
 	.tip-left {
-		padding-left: 2px;
+		padding-left: 6rpx;
 	}
 
 	.tip-right {
-		padding-right: 2px;
+		padding-right: 6rpx;
 	}
 </style>
