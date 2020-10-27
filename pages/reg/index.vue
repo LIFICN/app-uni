@@ -8,18 +8,18 @@
 
 		<view class="list-item">
 			<input class="list-input" type="text" v-model="phone" placeholder="请输入手机号" />
-			<text v-show="phone.length>0" class="list-close" @click="clearInput('phone')">✕</text>
+			<text v-show="phone.length>0" class="list-close" @tap="clearInput('phone')">✕</text>
 		</view>
 
 		<view class="list-item">
 			<input class="list-input" value="" v-model="pwd" placeholder="请输入密码" />
-			<text v-show="pwd.length>0" class="list-close" @click="clearInput('pwd')">✕</text>
+			<text v-show="pwd.length>0" class="list-close" @tap="clearInput('pwd')">✕</text>
 		</view>
 
 		<view class="list-item">
 			<input class="list-input" v-model="code" placeholder="请输入短信验证码" />
-			<text v-show="code.length>0" class="list-close" @click="clearInput('code')">✕</text>
-			<text class="code" @click="sendCode" :style="{color: [sendCodeInterval>0?'gray':'#007aff']}">
+			<text v-show="code.length>0" class="list-close" @tap="clearInput('code')">✕</text>
+			<text class="code" @tap="sendCode" :style="{color: [sendCodeInterval>0?'gray':'#007aff']}">
 				{{sendCodeInterval>0 ?`${sendCodeInterval}s`:'获取验证码'}}
 			</text>
 		</view>
@@ -115,7 +115,7 @@
 	}
 
 	.list-close {
-		font-size: 12rpx;
+		font-size: 25rpx;
 		display: flex;
 		align-items: center;
 		margin-right: 10rpx;

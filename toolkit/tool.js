@@ -6,9 +6,9 @@ export function toDateTimeString(timestamp) {
 		timestamp = parseInt(timestamp)
 
 	const date = new Date(timestamp);
-	const hour = date.getHours().toString().length > 1 ? date.getHours() : `0${date.getHours()}`;
-	const minute = date.getMinutes().toString().length > 1 ? date.getMinutes() : `0${date.getMinutes()}`;
-	const second = date.getSeconds().toString().length > 1 ? date.getSeconds() : `0${date.getSeconds()}`;
+	const hour = date.getHours() >= 10 ? date.getHours() : `0${date.getHours()}`;
+	const minute = date.getMinutes() >= 10 ? date.getMinutes() : `0${date.getMinutes()}`;
+	const second = date.getSeconds() >= 10 ? date.getSeconds() : `0${date.getSeconds()}`;
 	return `${date.toJSON().substring(0, 10)} ${hour}:${minute}:${second}`
 	//return `${date.toJSON().substring(0, 10)} ${hour}:${minute}`
 }

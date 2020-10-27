@@ -1,5 +1,5 @@
 <template>
-	<view hover-class="item-act" class="list-item" @click="click" :style="{height:height+'rpx'}">
+	<view hover-class="item-act" class="list-item" @tap="tap" :style="{height:height+'rpx'}">
 		<view class="list-content">
 			<text class="text-ellipsis">{{name}}</text>
 		</view>
@@ -30,7 +30,7 @@
 			return {};
 		},
 		methods: {
-			click() {
+			tap() {
 				this.$emit("click")
 			}
 		}
