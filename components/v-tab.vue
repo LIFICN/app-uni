@@ -87,7 +87,9 @@
 			this.$nextTick(function() {
 				const query = uni.createSelectorQuery();
 				query.select('.v-tab-item').boundingClientRect(data => {
-					this.convertWidth = data.width //获取每个tabItem平均宽度
+					if (data != null) { //避免小程序报错
+						this.convertWidth = data.width //获取每个tabItem平均宽度
+					}
 				}).exec();
 			})
 		}

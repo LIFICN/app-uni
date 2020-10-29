@@ -4,18 +4,18 @@
 
 		<view class="list-item">
 			<input class="list-input" type="text" v-model="phone" placeholder="请输入手机号" />
-			<text v-show="phone.length>0" class="list-close" @tap="clearInput('phone')">✕</text>
+			<view v-if="phone.length>0" class="list-close" @click="clearInput('phone')">✕</view>
 		</view>
 
 		<view class="list-item">
 			<input class="list-input" value="" v-model="pwd" placeholder="请输入新密码" />
-			<text v-show="pwd.length>0" class="list-close" @tap="clearInput('pwd')">✕</text>
+			<view v-if="pwd.length>0" class="list-close" @click="clearInput('pwd')">✕</view>
 		</view>
 
 		<view class="list-item">
 			<input class="list-input" v-model="code" placeholder="请输入短信验证码" />
-			<text v-show="code.length>0" class="list-close" @tap="clearInput('code')">✕</text>
-			<text class="code" @tap="sendCode" :style="{color: [sendCodeInterval>0?'gray':'#007aff']}">
+			<view v-if="code.length>0" class="list-close" @click="clearInput('code')">✕</view>
+			<text class="code" @click="sendCode" :style="{color: [sendCodeInterval>0?'gray':'#007aff']}">
 				{{sendCodeInterval>0 ?`${sendCodeInterval}s`:'获取验证码'}}
 			</text>
 		</view>
@@ -39,13 +39,15 @@
 		},
 		methods: {
 			clearInput(type) {
-				if (type === 'phone') {
-					this.phone = ''
-				} else if (type === 'pwd') {
-					this.pwd = ''
-				} else if (type === 'code') {
-					this.code = ''
-				}
+				setTimeout(() => {
+					if (type === 'phone') {
+						this.phone = ''
+					} else if (type === 'pwd') {
+						this.pwd = ''
+					} else if (type === 'code') {
+						this.code = ''
+					}
+				}, 100)
 			},
 			sendCode() {
 				var that = this

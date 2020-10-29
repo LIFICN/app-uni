@@ -9,6 +9,9 @@
 		{
 			"path": "pages/search/index",
 			"style": {
+				//#ifdef MP-WEIXIN
+				"navigationStyle": "custom",
+				//#endif
 				"app-plus": {
 					"titleNView": {
 						"autoBackButton": false,

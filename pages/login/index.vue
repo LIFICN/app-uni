@@ -8,20 +8,20 @@
 
 		<view class="list-item">
 			<input class="list-input" type="text" v-model="phone" placeholder="请输入手机号" />
-			<text v-show="phone.length>0" class="list-close" @tap="clearInput('phone')">✕</text>
+			<view v-if="phone.length>0" class="list-close" @click="clearInput('phone')">✕</view>
 		</view>
 
 		<view class="list-item">
 			<input class="list-input" value="" v-model="pwd" placeholder="请输入密码" />
-			<text v-show="pwd.length>0" class="list-close" @tap="clearInput('pwd')">✕</text>
+			<view v-if="pwd.length>0" class="list-close" @click="clearInput('pwd')">✕</view>
 		</view>
 
 		<button hover-class="btn-hover" class="btn">立即登录</button>
 
 		<view class="tip">
-			<text class="tip-right" @tap="goToPage('../forget/index')">忘记密码</text>
+			<text class="tip-right" @click="goToPage('../forget/index')">忘记密码</text>
 			|
-			<text class="tip-left" @tap="goToPage('../reg/index')">注册账户</text>
+			<text class="tip-left" @click="goToPage('../reg/index')">注册账户</text>
 		</view>
 	</view>
 </template>
@@ -46,11 +46,13 @@
 				})
 			},
 			clearInput(type) {
-				if (type === 'phone') {
-					this.phone = ''
-				} else if (type === 'pwd') {
-					this.pwd = ''
-				}
+				setTimeout(() => {
+					if (type === 'phone') {
+						this.phone = ''
+					} else if (type === 'pwd') {
+						this.pwd = ''
+					}
+				}, 100)
 			}
 		}
 	}

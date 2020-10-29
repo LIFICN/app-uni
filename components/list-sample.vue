@@ -1,6 +1,6 @@
 <template>
 	<!-- @touchmove.stop.prevent是为了阻止手机默认的滑动事件 -->
-	<view @touchmove.stop.prevent>
+	<view style="height: 100%;">
 		<hr-pull-load @refresh='refresh' @loadMore='loadMore' :height='-1' :pullHeight='50' :maxHeight='100' :lowerThreshold='20'
 		 :bottomTips='bottomTips' :isAllowPull="true" :isTab='false' ref='hrPullLoad'>
 			<!-- 插入自己的数据-->

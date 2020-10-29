@@ -3,16 +3,18 @@ import App from './App'
 
 Vue.config.productionTip = false
 
-var realHeight = 0 //屏幕实际高度-导航栏高度-状态栏高度
+var realHeight = 0 //页面高度
 Vue.prototype.$realHeight = function() {
 	if (realHeight === 0) {
 		let sysInfo = uni.getSystemInfoSync();
-		var height = sysInfo.screenHeight - 44;
 		//#ifdef APP-PLUS
-		realHeight = height - sysInfo.statusBarHeight;
+		realHeight = sysInfo.screenHeight - 44 - sysInfo.statusBarHeight; //屏幕实际高度-导航栏高度-状态栏高度
 		//#endif
-		//#ifndef APP-PLUS
-		realHeight = height;
+		//#ifdef H5
+		realHeight = sysInfo.windowHeight - 44;
+		//#endif
+		//#ifdef MP-WEIXIN
+		realHeight = sysInfo.windowHeight
 		//#endif
 	}
 
