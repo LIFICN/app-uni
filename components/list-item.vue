@@ -1,21 +1,16 @@
 <template>
-	<view hover-class="item-act" class="list-item" @tap="tap" :style="{height:height+'rpx'}">
-		<view class="list-content">
+	<view hover-class="item-act" class="flex-row list-item" @tap="tap" :style="{height:height+'rpx'}">
+		<view class="flex-row flex-1 list-content">
 			<text class="text-ellipsis">{{name}}</text>
 		</view>
-		<view class="list-right">
+		<view class="flex-row list-right">
 			<uni-icons type="arrowright" size="16"></uni-icons>
 		</view>
 	</view>
 </template>
 
 <script>
-	import uniIcons from '@/components/uni-icons/uni-icons.vue'
-
 	export default {
-		components: {
-			uniIcons
-		},
 		props: {
 			name: {
 				type: String, //名称
@@ -39,8 +34,6 @@
 
 <style lang="scss" scoped>
 	.list-item {
-		display: flex;
-		flex-direction: row;
 		flex-wrap: nowrap;
 		justify-content: flex-start;
 		overflow: hidden;
@@ -52,16 +45,12 @@
 	}
 
 	.list-content {
-		display: flex;
-		flex: 1;
-		flex-direction: row;
 		align-items: center;
 		color: #3b4144;
 		overflow: hidden;
 	}
 
 	.list-right {
-		display: flex;
 		justify-content: flex-end;
 		align-items: center;
 		color: #999;

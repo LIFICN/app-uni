@@ -1,22 +1,22 @@
 <template>
-	<view style="display: flex;flex-direction: column;" :style="{height:realHeight+'px'}">
+	<view class="flex-column" :style="{height:realHeight+'px'}">
 
 		<!-- #ifdef MP-WEIXIN -->
-		<wx-search-bar @input="input" @confirm="confirm" />
+		<mp-search-bar @input="input" @confirm="confirm" />
 		<!-- #endif -->
 
-		<view class="page-content">
+		<view class="flex-column flex-1 page-content">
 			<text>搜索框内容:{{content}}</text>
 		</view>
 	</view>
 </template>
 
 <script>
-	import wxSearchBar from '@/components/wx-search-bar.vue'
+	import mpSearchBar from '@/components/mp-search-bar.vue'
 
 	export default {
 		components: {
-			wxSearchBar
+			mpSearchBar
 		},
 		data() {
 			return {
@@ -52,9 +52,7 @@
 
 <style lang="scss" scoped>
 	.page-content {
-		display: flex;
 		justify-content: center;
 		align-items: center;
-		flex: 1;
 	}
 </style>

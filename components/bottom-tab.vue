@@ -1,9 +1,9 @@
 <template>
 	<view class="bottom-tab">
 		<scroll-view scroll-with-animation scroll-x :scroll-left="isScroll?scrollLeft:0" :style="{backgroundColor:bgColor}">
-			<view class="container">
+			<view class="flex-row container">
 
-				<view class="bottom-tab-item" v-for="(item,index) in tabList" :key="index" :id="index" @tap="tabSelect(index)"
+				<view class="flex-column bottom-tab-item" v-for="(item,index) in tabList" :key="index" :id="index" @tap="tabSelect(index)"
 				 :style="{height: height+'rpx'}">
 
 					<view :class="item.icon" v-if="!isImage" :style="{color:(index===current?fontSelectedColor:fontColor),fontSize:fontSize+'rpx'}"></view>
@@ -91,15 +91,11 @@
 	}
 
 	.container {
-		display: flex;
-		flex-direction: row;
 		border-top: 0.2px solid #C8C7CC;
 		padding-top: 10rpx;
 	}
 
 	.bottom-tab-item {
-		display: flex;
-		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		flex: 1;

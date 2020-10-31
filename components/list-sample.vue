@@ -5,7 +5,7 @@
 		 :bottomTips='bottomTips' :isAllowPull="true" :isTab='false' ref='hrPullLoad'>
 			<!-- 插入自己的数据-->
 			<view style="text-align: center; margin-top: 10px;">下拉刷新，上拉加载测试</view>
-			<view class="list" v-for="(item,index) in exampleInfo" :key='index'>
+			<view v-for="(item,index) in exampleInfo" :key='index'>
 				<list-item :name="item.name+'-'+index" @click="listItemClick(index)" :key="index" />
 			</view>
 		</hr-pull-load>

@@ -1,31 +1,26 @@
 <template>
 	<!-- https://ext.dcloud.net.cn/plugin?id=538 如果赶时间,直接下载别人模板改 -->
-	<view class="main" :style="{height:realHeight+'px'}">
+	<view class="flex-column main" :style="{height:realHeight+'px'}">
 
-		<view class="head">
-			<image class="head-img" src="../../static/logo.png">
+		<view class="flex-row list-item">
+			<input class="flex-1 list-input" type="text" :value="phone" @input="input($event,'phone')" placeholder="请输入手机号" />
+			<uni-icons v-if="phone.length>0" @click="clearInput('phone')" type="close" size="16"></uni-icons>
 		</view>
 
-		<view class="list-item">
-			<input class="list-input" type="text" v-model="phone" placeholder="请输入手机号" />
-			<view v-if="phone.length>0" class="list-close" @click="clearInput('phone')">✕</view>
+		<view class="flex-row list-item">
+			<input class="flex-1 list-input" :value="pwd" @input="input($event,'pwd')" placeholder="请输入密码" />
+			<uni-icons v-if="pwd.length>0" @click="clearInput('pwd')" type="close" size="16"></uni-icons>
 		</view>
 
-		<view class="list-item">
-			<input class="list-input" value="" v-model="pwd" placeholder="请输入密码" />
-			<view v-if="pwd.length>0" class="list-close" @click="clearInput('pwd')">✕</view>
-		</view>
-
-		<view class="list-item">
-			<input class="list-input" v-model="code" placeholder="请输入短信验证码" />
-			<view v-if="code.length>0" class="list-close" @click="clearInput('code')">✕</view>
-			<text class="code" @click="sendCode" :style="{color: [sendCodeInterval>0?'gray':'#007aff']}">
+		<view class="flex-row list-item">
+			<input class="flex-1 list-input" :value="code" @input="input($event,'code')" placeholder="请输入短信验证码" />
+			<uni-icons v-if="code.length>0" @click="clearInput('code')" type="close" size="16" style="margin-right: 3px;"></uni-icons>
+			<text class="flex-row code" @click="sendCode" :style="{color: [sendCodeInterval>0?'gray':'#007aff']}">
 				{{sendCodeInterval>0 ?`${sendCodeInterval}s`:'获取验证码'}}
 			</text>
 		</view>
 
 		<button hover-class="btn-hover" class="btn">立即注册</button>
-
 	</view>
 </template>
 
@@ -65,6 +60,16 @@
 						}
 					}, 1000);
 				}
+			},
+			input(e, type) {
+				const v = e.target.value
+				if (type === 'phone') {
+					this.phone = v
+				} else if (type === 'pwd') {
+					this.pwd = v
+				} else if (type === 'code') {
+					this.code = v
+				}
 			}
 		}
 	}
@@ -80,30 +85,11 @@
 	}
 
 	.main {
-		display: flex;
 		align-items: center;
-		flex-direction: column;
 		overflow: hidden;
 	}
 
-	.head {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		margin-top: 30rpx;
-		width: 161rpx;
-		height: 161rpx;
-	}
-
-	.head-img {
-		width: 100%;
-		height: 100%;
-	}
-
 	.list-item {
-		display: flex;
-		flex-direction: row;
 		border: 1px solid #F1F1F1;
 		border-radius: 50rpx;
 		padding: 16rpx;
@@ -112,15 +98,7 @@
 	}
 
 	.list-input {
-		flex: 1;
 		padding-right: 10rpx;
-	}
-
-	.list-close {
-		font-size: 25rpx;
-		display: flex;
-		align-items: center;
-		margin-right: 10rpx;
 	}
 
 	.btn {
@@ -133,7 +111,6 @@
 	}
 
 	.code {
-		display: flex;
 		justify-items: center;
 		align-items: center;
 		color: #555555;

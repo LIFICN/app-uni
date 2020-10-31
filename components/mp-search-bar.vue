@@ -1,14 +1,13 @@
 <template>
 	<view class="search-main">
 		<view :style="{height:statusBarHeight+'px'}"></view>
-		<view class="search-content" :style="{height:navBarHeight+'px',width:windowWidth+'px'}">
+		<view class="flex-row search-content" :style="{height:navBarHeight+'px',width:windowWidth+'px'}">
 			<uni-icons type="arrowleft" size="18" @click="back"></uni-icons>
-			<view class="search">
-				<input class="search-input" type="text" v-model="content" placeholder="请输入您需要的内容" @input="input" @confirm="confirm" />
-				<text v-if="content.length>0" class="search-close" @click="clearSearchInput">✕</text>
+			<view class="flex-row search">
+				<input class="flex-1 search-input" type="text" :value="content" placeholder="请输入您需要的内容" @input="input" @confirm="confirm" />
+				<uni-icons v-if="content!==''" @click="clearSearchInput" type="close" size="16" class="flex-row search-close"></uni-icons>
 			</view>
 		</view>
-
 
 		<!-- 需要添加占位符高度  状态栏高度+导航栏高度（否则下面tab会塌陷）-->
 		<!-- <view :style="{height: statusBarHeight+navBarHeight+'px'}"></view> -->
@@ -16,11 +15,7 @@
 </template>
 
 <script>
-	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	export default {
-		components: {
-			uniIcons
-		},
 		props: {},
 		data() {
 			return {
@@ -38,6 +33,7 @@
 				}, 100)
 			},
 			input(e) {
+				this.content = e.target.value
 				this.$emit("input", e.target.value)
 			},
 			confirm() {
@@ -74,15 +70,11 @@
 	}
 
 	.search-content {
-		display: flex;
 		justify-content: center;
 		align-items: center;
-		flex-direction: row;
 	}
 
 	.search {
-		display: flex;
-		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		border: 1px solid #999999;
@@ -92,16 +84,13 @@
 	}
 
 	.search-input {
-		flex: 1;
 		margin-left: 10px;
 		margin-right: 8px;
 		height: 25px;
 	}
 
 	.search-close {
-		font-size: 30rpx;
-		display: flex;
 		align-items: center;
-		margin-right: 10px;
+		margin-right: 6px;
 	}
 </style>

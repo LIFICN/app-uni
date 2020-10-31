@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import App from './App'
+import uniIcons from '@/components/uni-icons/uni-icons.vue'
 
 Vue.config.productionTip = false
+
+Vue.component("uni-icons",uniIcons)
 
 var realHeight = 0 //页面高度
 Vue.prototype.$realHeight = function() {

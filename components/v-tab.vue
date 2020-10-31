@@ -1,9 +1,9 @@
 <template>
 	<view class="v-tab" ref="vTab">
 		<scroll-view scroll-with-animation scroll-x :scroll-left="isScroll?scrollLeft:0" :style="{backgroundColor:bgColor,borderBottom:[isShowBorder?'0.5px solid #ddd':'none']}">
-			<view class="container">
+			<view class="flex-row container">
 
-				<view class="v-tab-item" v-for="(item,index) in tabList" :key="index" :id="index" @tap="tabSelect(index)">
+				<view class="flex-1 v-tab-item" v-for="(item,index) in tabList" :key="index" :id="index" @tap="tabSelect(index)">
 					<text class="text-nowrap" :style="{color:(index===current?fontSelectedColor:fontColor),fontSize:fontSize+'rpx',lineHeight: height+'rpx'}">{{item.name}}</text>
 					<view :style="{height:barHeight+'rpx',backgroundColor:[current===index?barBgColor:'']}"></view>
 				</view>
@@ -109,14 +109,11 @@
 	}
 
 	.v-tab-item {
-		flex: 1;
 		margin: 0 10upx;
 		padding: 0 20upx;
 	}
 
 	.container {
-		display: flex;
-		flex-direction: row;
 		text-align: center;
 	}
 

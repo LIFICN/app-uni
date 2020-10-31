@@ -1,6 +1,6 @@
 <template>
-	<view class="container" :style="{height:realHeight+'px'}">
-		<view class="content" style="display: flex;flex-direction: column;">
+	<view class="flex-column container" :style="{height:realHeight+'px'}">
+		<view class="flex-1 content" style="display: flex;flex-direction: column;">
 			<template v-if="footCurrent===0">
 				<tab :isScroll="true" :current="tabCurrent" :tabList="tabList" @change="tabChange" />
 
@@ -112,14 +112,11 @@
 
 <style lang="scss" scoped>
 	.container {
-		display: flex;
-		flex-direction: column;
 		width: 100%;
 		overflow: hidden;
 	}
 
 	.content {
-		flex: 1;
 		overflow-y: auto;
 	}
 </style>

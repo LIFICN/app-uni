@@ -1,19 +1,19 @@
 <template>
 	<!-- https://ext.dcloud.net.cn/plugin?id=538 如果赶时间,直接下载别人模板改 -->
-	<view class="main" :style="{height:realHeight+'px'}">
+	<view class="flex-column main" :style="{height:realHeight+'px'}">
 
-		<view class="head">
+		<view class="flex-column head">
 			<image class="head-img" src="../../static/logo.png">
 		</view>
 
-		<view class="list-item">
-			<input class="list-input" type="text" v-model="phone" placeholder="请输入手机号" />
-			<view v-if="phone.length>0" class="list-close" @click="clearInput('phone')">✕</view>
+		<view class="flex-row list-item">
+			<input class="flex-1 list-input" type="text" :value="phone" @input="input($event,'phone')" placeholder="请输入手机号" />
+			<uni-icons v-if="phone.length>0" @click="clearInput('phone')" type="close" size="16"></uni-icons>
 		</view>
 
-		<view class="list-item">
-			<input class="list-input" value="" v-model="pwd" placeholder="请输入密码" />
-			<view v-if="pwd.length>0" class="list-close" @click="clearInput('pwd')">✕</view>
+		<view class="flex-row list-item">
+			<input class="flex-1 list-input" value="" :value="pwd" @input="input($event,'pwd')" placeholder="请输入密码" />
+			<uni-icons v-if="pwd.length>0" @click="clearInput('pwd')" type="close" size="16"></uni-icons>
 		</view>
 
 		<button hover-class="btn-hover" class="btn">立即登录</button>
@@ -53,6 +53,14 @@
 						this.pwd = ''
 					}
 				}, 100)
+			},
+			input(e, type) {
+				const v = e.target.value
+				if (type === 'phone') {
+					this.phone = v
+				} else if (type === 'pwd') {
+					this.pwd = v
+				}
 			}
 		}
 	}
@@ -68,15 +76,11 @@
 	}
 
 	.main {
-		display: flex;
 		align-items: center;
-		flex-direction: column;
 		overflow: hidden;
 	}
 
 	.head {
-		display: flex;
-		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		margin-top: 30rpx;
@@ -90,8 +94,6 @@
 	}
 
 	.list-item {
-		display: flex;
-		flex-direction: row;
 		border: 1px solid #F1F1F1;
 		border-radius: 50rpx;
 		padding: 16rpx;
@@ -100,15 +102,7 @@
 	}
 
 	.list-input {
-		flex: 1;
 		padding-right: 10rpx;
-	}
-
-	.list-close {
-		font-size: 25rpx;
-		display: flex;
-		align-items: center;
-		margin-right: 10rpx;
 	}
 
 	.btn {
