@@ -1,11 +1,10 @@
 <template>
-	<view class="search-main">
+	<view class="main">
 		<view :style="{height:statusBarHeight+'px'}"></view>
-		<view class="flex-row search-content" :style="{height:navBarHeight+'px',width:windowWidth+'px'}">
+		<view class="flex-row content" :style="{height:navBarHeight+'px',width:windowWidth+'px'}">
 			<uni-icons type="arrowleft" size="19" @click="back" class="back"></uni-icons>
-			<view class="flex-row search">
-				<input class="flex-1 search-input" type="text" :value="content" placeholder="请输入您需要的内容" @input="input" @confirm="confirm" />
-				<uni-icons v-if="content!==''" @click="clearSearchInput" type="close" size="16" class="flex-row search-close"></uni-icons>
+			<view class="box">
+				<slot></slot>
 			</view>
 		</view>
 
@@ -26,19 +25,6 @@
 			}
 		},
 		methods: {
-			clearSearchInput() {
-				this.content = ''
-				setTimeout(() => { //延迟触发,小程序下巨坑
-					this.$emit("input", '')
-				}, 100)
-			},
-			input(e) {
-				this.content = e.target.value
-				this.$emit("input", e.target.value)
-			},
-			confirm() {
-				this.$emit("confirm")
-			},
 			back() {
 				uni.navigateBack()
 			}
@@ -62,12 +48,12 @@
 </script>
 
 <style lang="scss" scoped>
-	.search-main {
+	.main {
 		width: 100%;
 	}
 
-	.search-content {
-		justify-content: center;
+	.content {
+		justify-content: space-evenly;
 		align-items: center;
 	}
 
@@ -75,23 +61,7 @@
 		margin-left: 18rpx;
 	}
 
-	.search {
-		justify-content: center;
-		align-items: center;
-		border: 1px solid #999999;
-		border-radius: 30px;
+	.box {
 		width: 100%;
-		margin: 6px;
-	}
-
-	.search-input {
-		margin-left: 10px;
-		margin-right: 8px;
-		height: 25px;
-	}
-
-	.search-close {
-		align-items: center;
-		margin-right: 6px;
 	}
 </style>

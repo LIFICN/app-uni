@@ -3,6 +3,9 @@
 
 		<!-- #ifdef MP-WEIXIN -->
 		<mp-search-bar @input="input" @confirm="confirm" />
+		<!-- <mp-top-bar>
+			<view style="text-align: center;">自定义标题</view>
+		</mp-top-bar> -->
 		<!-- #endif -->
 
 		<view class="flex-column flex-1 page-content">
@@ -13,10 +16,12 @@
 
 <script>
 	import mpSearchBar from '@/components/mp-search-bar.vue'
+	import mpTopBar from '@/components/mp-top-bar.vue'
 
 	export default {
 		components: {
-			mpSearchBar
+			mpSearchBar,
+			mpTopBar
 		},
 		data() {
 			return {
