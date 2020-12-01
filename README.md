@@ -1,2 +1,2 @@
 # app-uni
-uni 手脚架
+uni-app 手脚架
