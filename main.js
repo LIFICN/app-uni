@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import App from './App'
 import uniIcons from '@/components/uni-icons/uni-icons.vue'
+import {
+	toDateTimeString
+} from '@/toolkit/tool.js'
 
 Vue.config.productionTip = false
 
-Vue.component("uni-icons",uniIcons)
+Vue.component("uni-icons", uniIcons)
 
 var realHeight = 0 //页面高度
 Vue.prototype.$realHeight = function() {
@@ -23,6 +26,59 @@ Vue.prototype.$realHeight = function() {
 
 	return realHeight;
 }
+
+Vue.prototype.$post = function(api, params) {
+	return new Promise(function(resolve, reject) {
+		uni.request({
+			url: api,
+			data: params,
+			method: "POST",
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded',
+			// },
+			success(res) {
+				resolve(res)
+			},
+			fail(err) {
+				reject(err)
+			}
+		})
+	});
+}
+
+Vue.prototype.$get = function(api, params) {
+	return new Promise(function(resolve, reject) {
+		uni.request({
+			url: api,
+			data: params,
+			method: "GET",
+			success(res) {
+				resolve(res)
+			},
+			fail(err) {
+				reject(err)
+			}
+		})
+	});
+}
+
+Vue.prototype.$showModal = function(title, content, showCancel, callback) {
+	uni.showModal({
+		title: title,
+		content: content,
+		showCancel: showCancel,
+		confirmColor: "#007AFF",
+		success(flag) {
+			if (flag['cancel']) callback(false)
+			else if (flag['confirm']) callback(true)
+		},
+		fail(err) {
+			console.log('弹窗调用失败', err)
+		}
+	})
+}
+
+Vue.prototype.$toDateTimeString = toDateTimeString
 
 App.mpType = 'app'
 

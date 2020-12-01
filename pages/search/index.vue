@@ -2,10 +2,9 @@
 	<view class="flex-column" :style="{height:realHeight+'px'}">
 
 		<!-- #ifdef MP-WEIXIN -->
-		<mp-search-bar @input="input" @confirm="confirm" />
-		<!-- <mp-top-bar>
+		<mp-top-bar>
 			<view style="text-align: center;">自定义标题</view>
-		</mp-top-bar> -->
+		</mp-top-bar>
 		<!-- #endif -->
 
 		<view class="flex-column flex-1 page-content">
@@ -44,14 +43,7 @@
 		onNavigationBarSearchInputConfirmed() {
 			console.log('search input confired')
 		},
-		methods: {
-			confirm() {
-				console.log('点击了搜索按钮')
-			},
-			input(value) {
-				this.content = value
-			}
-		}
+		methods: {}
 	}
 </script>
 
