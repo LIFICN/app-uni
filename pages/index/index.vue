@@ -74,6 +74,8 @@
 		},
 		onLoad() {},
 		created() {
+			console.log(this.$getCurrentDate())
+
 			for (var i = 0; i < 10; i++) {
 				this.tabList.push({
 					name: `tabItem-${i}`

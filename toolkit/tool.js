@@ -1,7 +1,7 @@
 //timestamp 时间戳,返回yyyy-MM-dd HH:mm:ss格式
 export function toDateTimeString(timestamp) {
-	if (timestamp === null || timestamp === "")
-		return;
+	if (timestamp === null || timestamp === "" || timestamp == 0)
+		return '';
 	if (typeof(timestamp) === "string")
 		timestamp = parseInt(timestamp)
 
