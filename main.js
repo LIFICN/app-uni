@@ -9,6 +9,8 @@ Vue.config.productionTip = false
 
 Vue.component("uni-icons", uniIcons)
 
+Vue.prototype.$toDateTimeString = toDateTimeString
+
 var realHeight = 0 //页面高度
 Vue.prototype.$realHeight = function() {
 	if (realHeight === 0) {
@@ -74,8 +76,6 @@ Vue.prototype.$showModal = function(title, content, showCancel, callback) {
 		}
 	})
 }
-
-Vue.prototype.$toDateTimeString = toDateTimeString
 
 Vue.prototype.$getCurrentDate = function() {
 	let date = new Date()
