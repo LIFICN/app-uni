@@ -97,7 +97,7 @@
 				this.tabCurrent = current;
 			},
 			getCurrentTime() {
-				let currTimestamp = Date.parse(new Date());
+				let currTimestamp = Date.now();
 				return toDateTimeString(currTimestamp)
 			},
 			goToPage(url) {
