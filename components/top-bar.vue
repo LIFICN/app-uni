@@ -1,8 +1,9 @@
 <template>
 	<view class="main">
 		<view :style="{height:statusBarHeight+'px'}"></view>
-		<view class="flex-row content" :style="{height:navBarHeight+'px',width:windowWidth+'px'}">
-			<uni-icons type="arrowleft" size="19" @click="back" class="back"></uni-icons>
+		<!-- <view class="flex-row content" :style="{height:navBarHeight+'px',width:windowWidth+'px'}"> -->
+		<view class="flex-row content" :style="{height:navBarHeight+'px',width:'100%'}">
+			<uni-icons type="arrowleft" size="22" @click="back" class="back"></uni-icons>
 			<view class="box">
 				<slot></slot>
 			</view>
@@ -53,15 +54,19 @@
 	}
 
 	.content {
-		justify-content: space-evenly;
+		position: relative;
 		align-items: center;
 	}
 
 	.back {
 		margin-left: 18rpx;
+		position: absolute;
+		left: 0rpx;
+		top: 22rpx;
 	}
 
 	.box {
 		width: 100%;
+		height: 100%;
 	}
 </style>

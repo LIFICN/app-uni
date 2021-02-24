@@ -1,11 +1,11 @@
 import Vue from 'vue'
 
-Vue.prototype.$post = function(api, params) {
+const request = function(api, params, type) {
 	return new Promise(function(resolve, reject) {
 		uni.request({
 			url: api,
 			data: params,
-			method: "POST",
+			method: type,
 			success(res) {
 				resolve(res)
 			},
@@ -16,18 +16,10 @@ Vue.prototype.$post = function(api, params) {
 	});
 }
 
+Vue.prototype.$post = function(api, params) {
+	request(api, params, "POST")
+}
+
 Vue.prototype.$get = function(api, params) {
-	return new Promise(function(resolve, reject) {
-		uni.request({
-			url: api,
-			data: params,
-			method: "GET",
-			success(res) {
-				resolve(res)
-			},
-			fail(err) {
-				reject(err)
-			}
-		})
-	});
+	request(api, params, "GET")
 }

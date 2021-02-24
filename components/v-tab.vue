@@ -106,19 +106,19 @@
 		::-webkit-scrollbar {
 			display: none;
 		}
-	}
 
-	.v-tab-item {
-		margin: 0 10upx;
-		padding: 0 20upx;
-	}
+		.v-tab-item {
+			margin: 0 10upx;
+			padding: 0 20upx;
+		}
 
-	.container {
-		text-align: center;
-	}
+		.container {
+			text-align: center;
+		}
 
-	.text-nowrap {
-		overflow: hidden;
-		white-space: nowrap;
+		.text-nowrap {
+			overflow: hidden;
+			white-space: nowrap;
+		}
 	}
 </style>

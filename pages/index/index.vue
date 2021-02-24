@@ -14,19 +14,20 @@
 			</template>
 
 			<template v-if="footCurrent===1">
-				<view style="flex: 1;display: flex;justify-content:center ;align-items: center;flex-direction: column;">
+				<view class="tab2">
 					<button @click="goToPage('../search/index')">搜索页</button>
-					<br>
 					<button @click="goToPage('../login/index')">登录页</button>
-					<br>
 					<button @click="goToPage('../reg/index')">注册页</button>
-					<br>
 					<button @click="goToPage('../forget/index')">忘记密码</button>
+					<!-- #ifdef MP-WEIXIN -->
+					<button open-type="getUserInfo" @getuserinfo="getuserinfo">获取微信小程序用户信息</button>
+					<!-- #endif -->
 				</view>
 			</template>
 
 			<template v-if="footCurrent===2">
-				<list-sample style="flex:1;overflow-y: auto;" />
+				<view style="text-align: center;">{{$getCurrentDate()}}</view>
+				<view style="text-align: center;">{{$DateTimeFormat(Date.now())}}</view>
 			</template>
 		</view>
 
@@ -37,19 +38,13 @@
 </template>
 
 <script>
-	import {
-		toDateTimeString
-	} from "@/toolkit/tool.js"
-
-	import tab from '@/components/v-tab.vue'
-	import bottomTab from '@/components/bottom-tab.vue'
-	import listSample from '@/components/list-sample.vue'
+	import tab from '@/components/v-tab'
+	import bottomTab from '@/components/bottom-tab'
 
 	export default {
 		components: {
 			tab,
-			bottomTab,
-			listSample
+			bottomTab
 		},
 		data() {
 			return {
@@ -72,10 +67,7 @@
 				]
 			}
 		},
-		onLoad() {},
 		created() {
-			console.log(this.$getCurrentDate())
-
 			for (var i = 0; i < 10; i++) {
 				this.tabList.push({
 					name: `tabItem-${i}`
@@ -96,17 +88,23 @@
 
 				this.tabCurrent = current;
 			},
-			getCurrentTime() {
-				let currTimestamp = Date.now();
-				return toDateTimeString(currTimestamp)
-			},
 			goToPage(url) {
 				uni.navigateTo({
 					url: url,
 					fail(error) {
-						console.log(JSON.stringify(error))
+						console.log(error)
 					}
 				})
+			},
+			getuserinfo(res) {
+				this.$showModal('test', JSON.stringify(res))
+			},
+			onReachBottom() {
+				console.log('bottom')
+			},
+			onPullDownRefresh() {
+				console.log('refresh')
+				setTimeout(() => uni.stopPullDownRefresh(), 1000)
 			}
 		}
 	}
@@ -120,5 +118,17 @@
 
 	.content {
 		overflow-y: auto;
+	}
+
+	.tab2 {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+
+		:nth-child(n) {
+			margin-bottom: 30rpx;
+		}
 	}
 </style>

@@ -2,9 +2,9 @@
 	<view class="flex-column" :style="{height:realHeight+'px'}">
 
 		<!-- #ifdef MP-WEIXIN -->
-		<mp-top-bar>
-			<view style="text-align: center;">自定义标题</view>
-		</mp-top-bar>
+		<top-bar>
+			<view class="flex-row title">自定义标题</view>
+		</top-bar>
 		<!-- #endif -->
 
 		<view class="flex-column flex-1 page-content">
@@ -14,13 +14,11 @@
 </template>
 
 <script>
-	import mpSearchBar from '@/components/mp-search-bar.vue'
-	import mpTopBar from '@/components/mp-top-bar.vue'
+	import topBar from '@/components/top-bar.vue'
 
 	export default {
 		components: {
-			mpSearchBar,
-			mpTopBar
+			topBar
 		},
 		data() {
 			return {
@@ -51,5 +49,11 @@
 	.page-content {
 		justify-content: center;
 		align-items: center;
+	}
+
+	.title {
+		align-items: center;
+		justify-content: center;
+		height: 100%;
 	}
 </style>

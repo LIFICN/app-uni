@@ -19,7 +19,6 @@
 </template>
 <script>
 	export default {
-		name: 'bottom-tab',
 		data() {
 			return {};
 		},
@@ -88,16 +87,16 @@
 		::-webkit-scrollbar {
 			display: none;
 		}
-	}
 
-	.container {
-		border-top: 0.2px solid #C8C7CC;
-		padding-top: 10rpx;
-	}
+		.container {
+			border-top: 0.2px solid #C8C7CC;
+			padding-top: 10rpx;
+		}
 
-	.bottom-tab-item {
-		justify-content: center;
-		align-items: center;
-		flex: 1;
+		.bottom-tab-item {
+			justify-content: center;
+			align-items: center;
+			flex: 1;
+		}
 	}
 </style>
