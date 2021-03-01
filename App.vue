@@ -13,8 +13,6 @@
 </script>
 
 <style>
-	/*每个页面公共css */
-	@import url("~@/static/iconfont.css");
 	/* 全局滚动条样式 */
-	@import url("~@/static/scrollbarEx.css");
+	/* @import url("~@/static/scrollbarEx.css"); */
 </style>
