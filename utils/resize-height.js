@@ -13,7 +13,7 @@ Vue.prototype.$realHeight = function() {
 		//#ifdef APP-PLUS
 		realHeight = screenHeight - titleBarHeight - statusBarHeight; //屏幕实际高度-导航栏高度-状态栏高度
 		//#endif
-		//#ifdef H5 || MP-WEIXIN
+		//#ifndef APP-PLUS
 		realHeight = windowHeight
 		//#endif
 	}

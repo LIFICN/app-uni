@@ -2,8 +2,7 @@
 	<view class="douyin-wrapper">
 		<swiper class="swiper" :current="current" :circular="true" @change="swiperChange" duration="200" :vertical="true">
 			<swiper-item v-for="(item,index) in videoList" :key="item.title">
-				<video :src="item.url" class="video" :controls="false" :loop="true" :enable-progress-gesture="false" :id="'video'+index"
-				 play-btn-position="center"></video>
+				<video :src="item.url" class="video" :controls="false" :loop="true" :enable-progress-gesture="false" :id="'video'+index"></video>
 			</swiper-item>
 		</swiper>
 	</view>
@@ -14,6 +13,7 @@
 		data() {
 			return {
 				current: 0,
+				preIndex: -1,
 				videoList: [{
 						title: 'video1',
 						url: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/hellouniapp/hello-nvue-swiper-vertical-02.mp4'
@@ -37,15 +37,16 @@
 		methods: {
 			swiperChange(e) {
 				const index = e.detail['current'];
-				this.current = index
-				this.playVideo(index)
+				if (this.preIndex == -1) this.preIndex = 0
 
+				this.videoList[this.preIndex].context.pause()
+				this.videoList[this.preIndex].context.seek(0)
 
 				setTimeout(() => {
-					this.videoList.forEach((el, idx) => {
-						if (idx != index) el['context'].stop()
-					})
-				}, 300)
+					this.current = index
+					this.preIndex = index
+					this.playVideo(index)
+				}, 50)
 			},
 			createVideoContext() {
 				this.videoList.forEach((el, index) => {
@@ -53,8 +54,7 @@
 				})
 			},
 			playVideo(index) {
-				this.videoList[index].context.play()
-				this.videoList[index].context.seek(0)
+				setTimeout(() => this.videoList[index].context.play(), 200)
 			}
 		}
 	}
@@ -62,7 +62,7 @@
 
 <style>
 	page {
-		/* #ifndef APP-NVUE */
+		/* #ifndef APP-PLUS */
 		display: flex;
 		width: 100%;
 		height: 100%;
@@ -80,7 +80,7 @@
 	.video {
 		flex: 1;
 
-		/* #ifndef APP-NVUE */
+		/* #ifndef APP-PLUS */
 		width: 100%;
 		/* #endif */
 	}

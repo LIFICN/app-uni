@@ -39,18 +39,6 @@
 			}
 		},
 		{
-			"path": "pages/reg/index",
-			"style": {
-				"navigationBarTitleText": "Register"
-			}
-		},
-		{
-			"path": "pages/forget/index",
-			"style": {
-				"navigationBarTitleText": "Forget"
-			}
-		},
-		{
 			"path": "pages/douyin/index",
 			"style": {
 				"navigationBarTitleText": "仿抖音"

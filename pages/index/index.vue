@@ -1,14 +1,12 @@
 <template>
-	<view class="flex-column container" :style="{height: mainHeight+'px'}">
+	<view class="flex-column flex-1 index-container">
 		<v-tab :isScroll="true" :current="tabCurrent" :tabList="tabList" @change="tabChange" />
 
-		<swiper class="swiper" :current="tabCurrent" :circular="false" @change="swiperChange">
+		<swiper class="flex-1 swiper" :current="tabCurrent" :circular="false" @change="swiperChange" :duration="200">
 			<swiper-item v-for="(item,index) in tabList" :key="index" class="flex-column swiper-item">
 				<view class="btn-c" v-if="index==0">
 					<button @click="goToPage('../search/index')">搜索页</button>
-					<button @click="goToPage('../login/index')">登录页</button>
-					<button @click="goToPage('../reg/index')">注册页</button>
-					<button @click="goToPage('../forget/index')">忘记密码</button>
+					<button @click="goToPage('../login/index')">登录demo页</button>
 					<!-- #ifdef MP-WEIXIN -->
 					<button open-type="getUserInfo" @getuserinfo="getuserinfo">获取微信小程序用户信息</button>
 					<!-- #endif -->
@@ -26,16 +24,6 @@
 	export default {
 		components: {
 			vTab,
-		},
-		computed: {
-			mainHeight() {
-				// #ifdef APP-PLUS
-				return this.$realHeight() - 50
-				// #endif
-				//#ifndef APP-PLUS
-				return this.$realHeight()
-				//#endif
-			}
 		},
 		data() {
 			return {
@@ -79,15 +67,15 @@
 	}
 </script>
 
-<style lang="scss" scoped>
-	.container {
-		width: 100%;
+<style lang="scss">
+	page {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		box-sizing: border-box;
+	}
 
-		.swiper {
-			height: 100%;
-			flex: 1;
-		}
-
+	.index-container {
 		.swiper-item {
 			justify-content: center;
 
