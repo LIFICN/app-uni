@@ -10,6 +10,7 @@
 					<!-- #ifdef MP-WEIXIN -->
 					<button open-type="getUserInfo" @getuserinfo="getuserinfo">获取微信小程序用户信息</button>
 					<!-- #endif -->
+					<button @click="addCount()">全局状态管理 {{count}}</button>
 				</view>
 
 				<view v-else style="text-align: center;">{{index}}</view>
@@ -25,6 +26,11 @@
 		components: {
 			vTab,
 		},
+		computed: {
+			count() {
+				return this.$store.state.count
+			}
+		},
 		data() {
 			return {
 				tabCurrent: 0,
@@ -32,7 +38,7 @@
 			}
 		},
 		created() {
-			for (var i = 0; i < 10; i++) {
+			for (var i = 0; i < 7; i++) {
 				this.tabList.push({
 					name: `tabItem-${i}`
 				})
@@ -43,25 +49,23 @@
 				this.tabCurrent = index
 			},
 			swiperChange(e) {
-				this.tabCurrent = e.detail['current'];;
+				this.tabCurrent = e.detail['current']
 			},
 			goToPage(url) {
-				uni.navigateTo({
-					url: url,
-					fail(error) {
-						console.log(error)
-					}
-				})
+				this.$toolkit.toPage.navigateTo(url)
 			},
 			getuserinfo(res) {
-				this.$showModal('test', JSON.stringify(res))
+				this.$toolkit.tips.showModal('test', JSON.stringify(res))
 			},
 			onReachBottom() {
 				console.log('bottom')
 			},
 			onPullDownRefresh() {
 				console.log('refresh')
-				setTimeout(() => uni.stopPullDownRefresh(), 1000)
+				setTimeout(() => uni.stopPullDownRefresh(), 600)
+			},
+			addCount() {
+				this.$store.dispatch('addCount')
 			}
 		}
 	}

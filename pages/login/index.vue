@@ -6,7 +6,8 @@
 		</view>
 
 		<view class="flex-row list-item">
-			<input class="flex-1 list-input" type="text" :value="phone" @input="input($event,'phone')" placeholder="请输入手机号" />
+			<input class="flex-1 list-input" type="text" :value="phone" @input="input($event,'phone')"
+				placeholder="请输入手机号" />
 			<uni-icons v-show="phone" @click="clearInput('phone')" type="close" size="16"></uni-icons>
 		</view>
 
@@ -17,7 +18,8 @@
 
 		<view class="flex-row list-item">
 			<input class="flex-1 list-input" :value="code" @input="input($event,'code')" placeholder="请输入短信验证码" />
-			<uni-icons v-show="code" @click="clearInput('code')" type="close" size="16" style="margin-right: 3px;"></uni-icons>
+			<uni-icons v-show="code" @click="clearInput('code')" type="close" size="16" style="margin-right: 3px;">
+			</uni-icons>
 			<text class="flex-row code" @click="sendCode" :style="{color: [sendCodeInterval>0?'gray':'#007aff']}">
 				{{sendCodeInterval>0 ?`${sendCodeInterval}s`:'获取验证码'}}
 			</text>
@@ -32,7 +34,7 @@
 		data() {
 			return {
 				content: '',
-				realHeight: this.$realHeight(),
+				realHeight: this.$toolkit.resizeHeight.getHeight(),
 				phone: '',
 				pwd: '',
 				code: '',

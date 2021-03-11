@@ -23,7 +23,7 @@
 		data() {
 			return {
 				content: '',
-				realHeight: this.$realHeight()
+				realHeight: this.$toolkit.resizeHeight.getHeight()
 			}
 		},
 		onNavigationBarButtonTap(e) {
